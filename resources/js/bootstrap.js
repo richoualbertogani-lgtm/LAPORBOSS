@@ -1,0 +1,1 @@
+// Laravel application bootstrap placeholder.
