@@ -2,21 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kategori;
-use App\Models\User;
-use Illuminate\Http\Request;
-
+/**
+ * Halaman awal (landing page) yang dapat dibuka siapa saja tanpa login.
+ */
 class HomeController extends Controller
 {
     /**
-     * Show the home page with the current student and available categories.
+     * Tampilkan halaman awal LaporBoss.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $userId = $request->session()->get('user_id');
-        $user = $userId ? User::find($userId) : null;
-        $kategori = Kategori::orderBy('nama_kategori')->get();
-
-        return view('home', compact('user', 'kategori'));
+        return view('home');
     }
 }

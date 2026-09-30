@@ -4,14 +4,13 @@ namespace Database\Seeders;
 
 use App\Models\Admin;
 use App\Models\Kategori;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the local demo administrator, categories, and student.
+     * Isi data awal: akun admin dan kategori aspirasi.
      */
     public function run(): void
     {
@@ -21,16 +20,12 @@ class DatabaseSeeder extends Seeder
         );
 
         foreach ([
-            ['nama_kategori' => 'Fasilitas Sekolah', 'deskripsi' => 'Aspirasi mengenai sarana dan prasarana sekolah.'],
+            ['nama_kategori' => 'Fasilitas', 'deskripsi' => 'Aspirasi mengenai sarana dan prasarana sekolah.'],
             ['nama_kategori' => 'Pembelajaran', 'deskripsi' => 'Aspirasi mengenai kegiatan dan proses pembelajaran.'],
             ['nama_kategori' => 'Kegiatan Siswa', 'deskripsi' => 'Aspirasi mengenai kegiatan organisasi dan siswa.'],
+            ['nama_kategori' => 'Lingkungan', 'deskripsi' => 'Aspirasi mengenai kebersihan dan lingkungan sekolah.'],
         ] as $item) {
             Kategori::firstOrCreate(['nama_kategori' => $item['nama_kategori']], $item);
         }
-
-        User::firstOrCreate(
-            ['nis' => '123456789'],
-            ['nama' => 'Siswa Demo', 'rombel' => 'XI RPL 1']
-        );
     }
 }

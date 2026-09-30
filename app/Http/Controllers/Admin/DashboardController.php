@@ -3,21 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aspirasi;
 use App\Models\Kategori;
-use App\Models\User;
-use Illuminate\Http\Request;
 
+/**
+ * Dashboard admin: ringkasan jumlah data.
+ */
 class DashboardController extends Controller
 {
     /**
-     * Display summary counts for the admin dashboard.
+     * Tampilkan ringkasan aspirasi per status dan jumlah kategori.
      */
-    public function index(Request $request)
+    public function index()
     {
         return view('admin.dashboard', [
-            'adminId' => $request->session()->get('admin_id'),
-            'totalUsers' => User::count(),
+            'totalAspirasi' => Aspirasi::count(),
+            'perStatus' => Aspirasi::selectRaw('status, count(*) as total')->groupBy('status')->pluck('total', 'status'),
             'totalKategori' => Kategori::count(),
+            'terbaru' => Aspirasi::with('kategori')->latest('id_aspirasi')->limit(5)->get(),
         ]);
     }
 }

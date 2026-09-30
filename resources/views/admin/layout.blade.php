@@ -18,6 +18,10 @@
                 href="{{ route('admin.dashboard') }}"
             >▦ Dashboard</a>
             <a
+                class="side-link {{ request()->routeIs('admin.aspirasi.*') ? 'active' : '' }}"
+                href="{{ route('admin.aspirasi.index') }}"
+            >✉ Aspirasi</a>
+            <a
                 class="side-link {{ request()->routeIs('admin.kategori.*') ? 'active' : '' }}"
                 href="{{ route('admin.kategori.index') }}"
             >◫ Kategori</a>
@@ -39,9 +43,7 @@
                 <span class="admin-badge">Administrator</span>
             </header>
 
-            @if (session('success'))
-                <div class="flash success">{{ session('success') }}</div>
-            @endif
+            @include('partials.flash')
 
             @yield('content')
         </div>

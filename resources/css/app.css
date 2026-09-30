@@ -6,11 +6,11 @@
 :root {
     --ink: #102c22;
     --muted: #6c7b75;
-    --green: #247b58;
-    --green-dark: #123d2e;
+    --green: #4a7c59;
+    --green-dark: #233d31;
     --mint: #eaf6ef;
     --line: #dfe9e3;
-    --paper: #f7faf8;
+    --paper: #f7f9f7;
     --white: #fff;
     --danger: #b94b4b;
     --shadow: 0 16px 45px rgba(16, 44, 34, .08);
@@ -105,7 +105,7 @@ a {
 /* Landing page hero, feature cards, and category list. */
 .hero {
     display: grid;
-    grid-template-columns: 1.5fr .8fr;
+    grid-template-columns: 1.6fr .7fr;
     gap: 60px;
     align-items: center;
     padding: 54px 0 90px;
@@ -123,7 +123,8 @@ a {
     font-size: clamp(42px, 6vw, 72px);
     line-height: .98;
     letter-spacing: -.055em;
-    margin: 16px 0 24px;
+    font-weight: 400;
+    margin: 0 0 24px;
 }
 
 .hero h1 span {
@@ -162,7 +163,7 @@ a {
 }
 
 .btn.primary:hover {
-    background: #1c6648;
+    background: #3f6b4d;
 }
 
 .btn.secondary {
@@ -191,7 +192,7 @@ a {
     width: 46px;
     height: 46px;
     border-radius: 14px;
-    background: #2c8a63;
+    background: var(--green);
     display: grid;
     place-items: center;
     margin-bottom: 26px;
@@ -687,5 +688,451 @@ tr:last-child td {
 
     .table-card {
         font-size: 12px;
+    }
+}
+
+
+/* ------------------------------------------------------------------
+   Portal siswa: header halaman, kartu form, dan kolom isian.
+------------------------------------------------------------------ */
+.portal-body {
+    background: #f4f6f8;
+}
+
+.portal-header {
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    padding: 22px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.portal-header h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.portal-header p {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.portal-nav {
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.portal-nav a:hover {
+    color: var(--green);
+}
+
+.portal-main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 24px 80px;
+}
+
+.portal-main .flash {
+    margin: 0 0 18px;
+}
+
+.card-form {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 26px;
+    margin-bottom: 18px;
+}
+
+.card-form.narrow {
+    max-width: 640px;
+}
+
+.card-form h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.hint {
+    font-size: 11px;
+    color: var(--muted);
+    margin: 4px 0 0;
+}
+
+.field-title {
+    display: block;
+    margin: 18px 0 8px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.info-banner {
+    background: #eaf6ef;
+    color: #2f6b49;
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 24px;
+    margin-top: 18px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field label {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.field input,
+.field select,
+.field textarea,
+.search-row input,
+.form-grid select {
+    width: 100%;
+    border: 1px solid #d6e1da;
+    border-radius: 9px;
+    padding: 12px 13px;
+    font: inherit;
+    font-size: 13px;
+    background: #fff;
+    outline: none;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus,
+.search-row input:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(74, 124, 89, .12);
+}
+
+/* Kolom isi aspirasi memanjang ke bawah di sisi kanan, seperti pada desain. */
+.form-cols .field:nth-child(6) {
+    grid-column: 2;
+    grid-row: 3 / span 2;
+}
+
+.form-cols .field:nth-child(5) {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.field textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.field-error {
+    color: var(--danger);
+    font-size: 11px;
+}
+
+.field-error:empty {
+    display: none;
+}
+
+/* Kotak lampiran foto. */
+.attachment {
+    background: #f6f8f7;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+}
+
+.attachment-empty,
+.attachment-file {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.attachment-file[hidden],
+.attachment-empty[hidden] {
+    display: none;
+}
+
+.attachment-file img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.attachment-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+}
+
+.icon-danger {
+    border: 0;
+    background: none;
+    color: var(--danger);
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn.outline {
+    background: #fff;
+    border: 1px solid var(--line);
+    color: var(--ink);
+}
+
+.btn.small {
+    padding: 8px 14px;
+    font-size: 12px;
+}
+
+.form-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 22px;
+}
+
+.form-bottom .form-actions {
+    margin-top: 0;
+}
+
+/* Kolom pencarian kode tiket. */
+.search-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+/* Detail aspirasi (dipakai halaman lacak dan halaman admin). */
+.detail-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.detail-head h2 {
+    font-size: 20px;
+}
+
+.detail-body {
+    font-size: 14px;
+    line-height: 1.7;
+    white-space: pre-line;
+    margin: 18px 0;
+}
+
+.detail-photo {
+    max-width: 320px;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    margin-bottom: 8px;
+}
+
+.sub-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 26px 0 12px;
+}
+
+.sub-title.first {
+    margin-top: 0;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 18px;
+    align-items: start;
+    margin-top: 14px;
+}
+
+.back,
+.link {
+    color: var(--green);
+    font-weight: 700;
+}
+
+/* Lencana status. */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 11px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.badge-diajukan { background: #fdf3d8; color: #9a6b00; }
+.badge-dibaca { background: #e3eefb; color: #2b5f9e; }
+.badge-diproses { background: #e3f4ea; color: #2f7a52; }
+.badge-selesai { background: #d4ecdd; color: #1d5c3b; }
+
+/* Linimasa: titik hijau menandakan tahap sudah dilalui. */
+.timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.timeline-item {
+    position: relative;
+    display: flex;
+    gap: 14px;
+    padding-bottom: 20px;
+    color: #9aa8a2;
+}
+
+.timeline-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 16px;
+    bottom: 0;
+    width: 2px;
+    background: var(--line);
+}
+
+.timeline-item.done {
+    color: var(--ink);
+}
+
+.timeline-item.done:not(:last-child)::before {
+    background: var(--green);
+}
+
+.timeline-mark {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #cfdad4;
+    background: #fff;
+    flex-shrink: 0;
+    margin-top: 2px;
+    z-index: 1;
+}
+
+.timeline-item.done .timeline-mark {
+    background: var(--green);
+    border-color: var(--green);
+}
+
+.timeline-item strong {
+    display: block;
+    font-size: 13px;
+}
+
+.timeline-item small {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* Riwayat/tanggapan admin. */
+.reply {
+    border-left: 3px solid var(--green);
+    background: #f6f9f7;
+    border-radius: 0 10px 10px 0;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.reply small {
+    margin-left: 8px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.reply p {
+    margin: 6px 0 0;
+    line-height: 1.6;
+}
+
+/* Tambahan tampilan admin. */
+.stats-grid.four {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.toolbar.spaced {
+    margin-top: 26px;
+}
+
+.toolbar.spaced .sub-title {
+    margin: 0;
+}
+
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.filter-tabs a {
+    padding: 8px 14px;
+    border-radius: 20px;
+    background: #fff;
+    border: 1px solid var(--line);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.filter-tabs a.active {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
+}
+
+.form-grid select {
+    font-size: 14px;
+}
+
+@media (max-width: 800px) {
+    .form-cols,
+    .detail-grid,
+    .stats-grid.four {
+        grid-template-columns: 1fr;
+    }
+
+    .form-cols .field:nth-child(5),
+    .form-cols .field:nth-child(6) {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .form-bottom {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
     }
 }

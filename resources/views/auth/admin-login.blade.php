@@ -6,7 +6,7 @@
         <div class="auth-card">
             <span class="eyebrow">ADMIN</span>
             <h1>Masuk Admin</h1>
-            <p class="muted">Kelola kategori dan data aplikasi dari dashboard.</p>
+            <p class="muted">Kelola aspirasi dan kategori dari dashboard admin.</p>
 
             @if ($errors->any())
                 <div class="form-error">{{ $errors->first() }}</div>

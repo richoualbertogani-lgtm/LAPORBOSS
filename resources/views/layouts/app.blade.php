@@ -7,28 +7,21 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    {{-- Main navigation changes depending on the student session. --}}
+    {{-- Navigasi utama. Siswa adalah guest, jadi hanya ada tombol "Masuk" untuk admin. --}}
     <nav class="navbar">
         <a class="brand" href="{{ route('home') }}"><span class="brand-dot">L</span> LaporBoss</a>
         <div class="nav-links">
             <a href="{{ route('home') }}">Beranda</a>
-            @if(session('user_id'))
-                <a href="#aspirasi">Aspirasi Saya</a>
-                <form method="POST" action="{{ route('logout') }}" class="inline-form">@csrf<button class="nav-button">Keluar</button></form>
+            @if(session('admin_id'))
+                <a class="nav-cta" href="{{ route('admin.dashboard') }}">Dashboard</a>
             @else
-                <a href="{{ route('login') }}">Masuk</a>
-                <a class="nav-cta" href="{{ route('register') }}">Daftar</a>
+                <a class="nav-cta" href="{{ route('admin.login') }}">Masuk</a>
             @endif
         </div>
     </nav>
 
-    {{-- Display one-request feedback before rendering the current page. --}}
-    @if (session('success'))
-        <div class="flash success">{{ session('success') }}</div>
-    @endif
-    @if (session('error'))
-        <div class="flash error">{{ session('error') }}</div>
-    @endif
+    {{-- Pesan sukses/gagal yang tampil satu kali. --}}
+    @include('partials.flash')
 
     <main class="page">@yield('content')</main>
 </body>

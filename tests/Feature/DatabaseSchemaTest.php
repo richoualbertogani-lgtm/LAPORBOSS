@@ -12,14 +12,19 @@ class DatabaseSchemaTest extends TestCase
 
     public function test_application_tables_match_the_aspirasi_schema(): void
     {
-        $this->assertSame(['nis', 'nama', 'rombel'], Schema::getColumnListing('users'));
+        // Tabel users hanya identitas guest: tanpa password/email/remember_token.
+        $this->assertSame(['nis', 'nama', 'rombel', 'created_at', 'updated_at'], Schema::getColumnListing('users'));
         $this->assertSame(
             ['id_admin', 'email_admin', 'password_admin', 'created_at', 'update_at'],
             Schema::getColumnListing('admin')
         );
         $this->assertSame(['id_kategori', 'nama_kategori', 'deskripsi'], Schema::getColumnListing('kategori'));
         $this->assertSame(
-            ['id_aspirasi', 'nis', 'id_kategori', 'judul', 'isi_aspirasi', 'status', 'tanggal', 'balasan_admin_id', 'created_at', 'update_at'],
+            [
+                'id_aspirasi', 'kode_tiket', 'nis', 'id_kategori', 'judul', 'isi_aspirasi', 'lampiran',
+                'status', 'tanggal', 'dibaca_at', 'diproses_at', 'selesai_at',
+                'balasan_admin_id', 'created_at', 'update_at',
+            ],
             Schema::getColumnListing('tb_aspirasi')
         );
         $this->assertSame(

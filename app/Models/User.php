@@ -3,32 +3,28 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+/**
+ * Identitas siswa pengirim aspirasi.
+ *
+ * Model ini BUKAN akun login. Siswa hanya berstatus guest, datanya dicatat
+ * otomatis ketika mengirim aspirasi (lihat AspirasiController::store).
+ */
+class User extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
-    // Student records use NIS as their non-incrementing primary key.
+    // NIS dipakai sebagai primary key dan tidak auto-increment.
     protected $primaryKey = 'nis';
     public $incrementing = false;
     protected $keyType = 'int';
-    public $timestamps = false;
 
     protected $fillable = ['nis', 'nama', 'rombel'];
 
     /**
-     * Use the student's NIS as the authentication identifier.
-     */
-    public function getAuthIdentifierName(): string
-    {
-        return 'nis';
-    }
-
-    /**
-     * Get the aspirations submitted by this student.
+     * Aspirasi yang pernah dikirim oleh siswa ini.
      */
     public function aspirasi(): HasMany
     {

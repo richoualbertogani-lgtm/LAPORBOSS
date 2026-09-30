@@ -1,25 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- Welcome content and calls to action depend on the student session. --}}
+    {{-- Bagian utama: ajakan menyampaikan aspirasi tanpa perlu akun. --}}
     <section class="hero">
         <div>
-            <span class="eyebrow">PORTAL ASPIRASI SEKOLAH</span>
             <h1>Sampaikan aspirasi,<br><span>wujudkan perubahan.</span></h1>
             <p>
                 LaporBoss membantu siswa menyampaikan ide, keluhan, dan aspirasi secara terstruktur agar dapat
                 ditindaklanjuti dengan transparan.
             </p>
             <div class="hero-actions">
-                @if ($user)
-                    <a class="btn primary" href="#buat-aspirasi">+ Buat Aspirasi</a>
-                    <a class="btn secondary" href="#aspirasi">Lihat Aspirasi Saya</a>
-                @else
-                    <a class="btn primary" href="{{ route('register') }}">Mulai Sampaikan Aspirasi</a>
-                    <a class="btn secondary" href="{{ route('login') }}">Sudah punya akun?</a>
-                @endif
+                {{-- Tombol utama membuka form "Buat Aspirasi". --}}
+                <a class="btn primary" href="{{ route('aspirasi.create') }}">Mulai Sampaikan Aspirasi</a>
+                <a class="btn secondary" href="{{ route('aspirasi.lacak') }}">Lacak Aspirasi</a>
             </div>
         </div>
+
+        {{-- Kartu ringkasan di sisi kanan. --}}
         <div class="hero-card">
             <div class="mini-icon">✓</div>
             <strong>Ruang suara siswa</strong>
@@ -28,8 +25,8 @@
         </div>
     </section>
 
-    {{-- Explain the main aspiration workflow. --}}
-    <section class="section" id="aspirasi">
+    {{-- Penjelasan alur kerja aplikasi. --}}
+    <section class="section" id="fitur">
         <div class="section-heading">
             <div>
                 <span class="eyebrow">FITUR UTAMA</span>
@@ -52,29 +49,6 @@
                 <h3>Respons Admin</h3>
                 <p>Admin dapat memberi tanggapan dan riwayat penanganan.</p>
             </article>
-        </div>
-    </section>
-
-    {{-- Categories are loaded from the database; show guidance when none exist. --}}
-    <section class="section categories" id="buat-aspirasi">
-        <div class="section-heading">
-            <div>
-                <span class="eyebrow">KATEGORI</span>
-                <h2>Pilih ruang aspirasi yang sesuai.</h2>
-            </div>
-        </div>
-        <div class="category-list">
-            @forelse ($kategori as $item)
-                <div class="category-item">
-                    <div>
-                        <strong>{{ $item->nama_kategori }}</strong>
-                        <p>{{ $item->deskripsi ?: 'Aspirasi terkait lingkungan sekolah.' }}</p>
-                    </div>
-                    <span>→</span>
-                </div>
-            @empty
-                <div class="empty">Belum ada kategori. Admin dapat menambahkannya melalui dashboard.</div>
-            @endforelse
         </div>
     </section>
 @endsection

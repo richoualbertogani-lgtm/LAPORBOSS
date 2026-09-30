@@ -6,20 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Buat tabel identitas pengirim aspirasi dan tabel sesi.
+     *
+     * Tabel `users` HANYA menyimpan identitas siswa (guest) yang mengisi form.
+     * Tidak ada password, email, maupun remember_token, sehingga siswa tidak
+     * perlu mendaftar atau login untuk mengirim aspirasi.
+     */
     public function up(): void
     {
+        // Identitas siswa pengirim aspirasi (diisi otomatis saat form dikirim).
         Schema::create('users', function (Blueprint $table) {
             $table->unsignedInteger('nis')->primary();
             $table->string('nama');
             $table->string('rombel', 50);
+            $table->timestamps();
         });
 
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
-        });
-
+        // Sesi dipakai admin; kolom user_id dibiarkan kosong untuk guest.
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('user_id')->nullable()->index();
@@ -30,10 +34,12 @@ return new class extends Migration
         });
     }
 
+    /**
+     * Hapus tabel yang dibuat oleh migration ini.
+     */
     public function down(): void
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }
 };

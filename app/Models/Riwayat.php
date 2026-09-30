@@ -22,7 +22,7 @@ class Riwayat extends Model
     }
 
     /**
-     * Get the administrator who recorded this history entry.
+     * Get the administrator who recorded this history entry (null = dibuat sistem/siswa).
      */
     public function admin(): BelongsTo
     {
