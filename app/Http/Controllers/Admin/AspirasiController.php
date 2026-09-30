@@ -20,10 +20,11 @@ class AspirasiController extends Controller
         $status = $request->query('status');
 
         $aspirasi = Aspirasi::with(['kategori', 'user'])
-            ->when(
+           ->when(
                 array_key_exists($status, Aspirasi::STATUS_LABEL),
-                fn ($query) => $query->where('status', $status)
-            )
+                fn ($query) => $query->where('status', $status),
+                fn ($query) => $query->where('status', '!=', Aspirasi::STATUS_SELESAI)
+                )
             ->latest('id_aspirasi')
             ->paginate(10)
             ->withQueryString();
@@ -63,6 +64,13 @@ class AspirasiController extends Controller
 
         if (! $berhasil) {
             return back()->with('error', 'Status tidak dapat diubah mundur atau ke status yang sama.');
+        }
+
+        // Aspirasi selesai hilang dari daftar aktif, jadi kembali ke daftar.
+        if ($data['status'] === Aspirasi::STATUS_SELESAI) {
+            return redirect()
+        ->route('admin.aspirasi.index')
+        ->with('success', 'Aspirasi telah selesai dan dipindahkan dari daftar aktif.');
         }
 
         return back()->with('success', 'Status aspirasi berhasil diperbarui.');

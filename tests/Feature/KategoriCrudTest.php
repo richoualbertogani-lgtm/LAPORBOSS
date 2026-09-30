@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Kategori;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -44,6 +45,28 @@ class KategoriCrudTest extends TestCase
             ->assertRedirect(route('admin.kategori.index'));
 
         $this->assertDatabaseMissing('kategori', ['id_kategori' => $kategori->id_kategori]);
+    }
+
+    public function test_admin_cannot_delete_kategori_used_by_an_aspirasi(): void
+    {
+        $kategori = Kategori::create(['nama_kategori' => 'Fasilitas']);
+        $user = User::create(['nis' => 123456789, 'nama' => 'Siswa', 'rombel' => 'XI RPL 1']);
+
+        $kategori->aspirasi()->create([
+            'kode_tiket' => 'ASP-TEST123',
+            'nis' => $user->nis,
+            'judul' => 'Perbaikan fasilitas',
+            'isi_aspirasi' => 'Mohon diperbaiki.',
+            'status' => 'diajukan',
+            'tanggal' => now(),
+        ]);
+
+        $this->asAdmin()
+            ->delete(route('admin.kategori.destroy', $kategori))
+            ->assertRedirect(route('admin.kategori.index'))
+            ->assertSessionHas('error', 'Kategori tidak dapat dihapus karena masih digunakan oleh aspirasi.');
+
+        $this->assertDatabaseHas('kategori', ['id_kategori' => $kategori->id_kategori]);
     }
 
     public function test_nama_kategori_must_be_unique(): void

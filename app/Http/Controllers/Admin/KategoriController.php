@@ -76,6 +76,11 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
+        if ($kategori->aspirasi()->exists()) {
+            return redirect()->route('admin.kategori.index')
+                ->with('error', 'Kategori tidak dapat dihapus karena masih digunakan oleh aspirasi.');
+        }
+
         $kategori->delete();
 
         return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil dihapus.');

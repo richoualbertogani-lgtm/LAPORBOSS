@@ -20,7 +20,11 @@ class DashboardController extends Controller
             'totalAspirasi' => Aspirasi::count(),
             'perStatus' => Aspirasi::selectRaw('status, count(*) as total')->groupBy('status')->pluck('total', 'status'),
             'totalKategori' => Kategori::count(),
-            'terbaru' => Aspirasi::with('kategori')->latest('id_aspirasi')->limit(5)->get(),
+            'terbaru' => Aspirasi::with('kategori')
+            ->where('status', '!=', Aspirasi::STATUS_SELESAI)
+            ->latest('id_aspirasi')
+            ->limit(5)
+            ->get(),
         ]);
     }
 }
