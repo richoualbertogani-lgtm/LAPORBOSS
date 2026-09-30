@@ -8,11 +8,17 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    /**
+     * Show the student sign-in form.
+     */
     public function create()
     {
         return view('auth.login');
     }
 
+    /**
+     * Find a student by NIS and start an authenticated session.
+     */
     public function store(Request $request)
     {
         $credentials = $request->validate([
@@ -31,6 +37,9 @@ class LoginController extends Controller
         return redirect()->intended(route('home'))->with('success', 'Login berhasil.');
     }
 
+    /**
+     * Clear the student session and return to the home page.
+     */
     public function destroy(Request $request)
     {
         $request->session()->forget('user_id');

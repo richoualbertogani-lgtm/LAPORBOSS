@@ -15,6 +15,9 @@ class Kategori extends Model
     public $timestamps = false;
     protected $fillable = ['nama_kategori', 'deskripsi'];
 
+    /**
+     * Get the aspirations filed under this category.
+     */
     public function aspirasi(): HasMany
     {
         return $this->hasMany(Aspirasi::class, 'id_kategori', 'id_kategori');

@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        // Administrator credentials use the existing legacy column names.
         Schema::create('admin', function (Blueprint $table) {
             $table->increments('id_admin');
             $table->string('email_admin')->unique();

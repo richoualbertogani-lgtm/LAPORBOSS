@@ -8,11 +8,17 @@ use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
+    /**
+     * Show the student registration form.
+     */
     public function create()
     {
         return view('auth.register');
     }
 
+    /**
+     * Validate registration details, create the student, and sign them in.
+     */
     public function store(Request $request)
     {
         $data = $request->validate([

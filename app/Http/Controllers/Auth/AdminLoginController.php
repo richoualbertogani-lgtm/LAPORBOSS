@@ -9,11 +9,17 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminLoginController extends Controller
 {
+    /**
+     * Show the administrator sign-in form.
+     */
     public function create()
     {
         return view('auth.admin-login');
     }
 
+    /**
+     * Verify administrator credentials and start an authenticated session.
+     */
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -24,7 +30,9 @@ class AdminLoginController extends Controller
         $admin = Admin::where('email_admin', $data['email_admin'])->first();
 
         if (! $admin || ! Hash::check($data['password'], $admin->password_admin)) {
-            return back()->withErrors(['email_admin' => 'Email atau password admin tidak sesuai.'])->onlyInput('email_admin');
+            return back()
+                ->withErrors(['email_admin' => 'Email atau password admin tidak sesuai.'])
+                ->onlyInput('email_admin');
         }
 
         $request->session()->regenerate();
@@ -33,6 +41,9 @@ class AdminLoginController extends Controller
         return redirect()->route('admin.dashboard')->with('success', 'Login admin berhasil.');
     }
 
+    /**
+     * Clear the administrator session and return to the home page.
+     */
     public function destroy(Request $request)
     {
         $request->session()->forget('admin_id');

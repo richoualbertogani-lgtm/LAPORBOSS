@@ -7,6 +7,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
+    {{-- Main navigation changes depending on the student session. --}}
     <nav class="navbar">
         <a class="brand" href="{{ route('home') }}"><span class="brand-dot">L</span> LaporBoss</a>
         <div class="nav-links">
@@ -21,8 +22,13 @@
         </div>
     </nav>
 
-    @if(session('success')) <div class="flash success">{{ session('success') }}</div> @endif
-    @if(session('error')) <div class="flash error">{{ session('error') }}</div> @endif
+    {{-- Display one-request feedback before rendering the current page. --}}
+    @if (session('success'))
+        <div class="flash success">{{ session('success') }}</div>
+    @endif
+    @if (session('error'))
+        <div class="flash error">{{ session('error') }}</div>
+    @endif
 
     <main class="page">@yield('content')</main>
 </body>

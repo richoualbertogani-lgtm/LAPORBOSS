@@ -1,3 +1,34 @@
-@if($errors->any()) <div class="form-error"><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div> @endif
-<div class="form-grid"><label>Nama kategori<input name="nama_kategori" value="{{ old('nama_kategori',$kategori->nama_kategori ?? '') }}" required></label><label>Deskripsi<textarea name="deskripsi" rows="6" placeholder="Jelaskan jenis aspirasi pada kategori ini.">{{ old('deskripsi',$kategori->deskripsi ?? '') }}</textarea></label></div>
-<div class="form-actions"><a class="btn secondary" href="{{ route('admin.kategori.index') }}">Batal</a><button class="btn primary" type="submit">{{ $submitLabel }}</button></div>
+{{-- Show validation feedback shared by both create and edit pages. --}}
+@if ($errors->any())
+    <div class="form-error">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<div class="form-grid">
+    <label>
+        Nama kategori
+        <input
+            name="nama_kategori"
+            value="{{ old('nama_kategori', $kategori->nama_kategori ?? '') }}"
+            required
+        >
+    </label>
+    <label>
+        Deskripsi
+        <textarea
+            name="deskripsi"
+            rows="6"
+            placeholder="Jelaskan jenis aspirasi pada kategori ini."
+        >{{ old('deskripsi', $kategori->deskripsi ?? '') }}</textarea>
+    </label>
+</div>
+
+<div class="form-actions">
+    <a class="btn secondary" href="{{ route('admin.kategori.index') }}">Batal</a>
+    <button class="btn primary" type="submit">{{ $submitLabel }}</button>
+</div>

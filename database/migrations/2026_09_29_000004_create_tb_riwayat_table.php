@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        // Record each status change with the administrator who handled it.
         Schema::create('tb_riwayat', function (Blueprint $table) {
             $table->increments('id_riwayat');
             $table->unsignedInteger('aspirasi_id');

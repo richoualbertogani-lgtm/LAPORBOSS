@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdminMiddleware
 {
+    /**
+     * Allow requests only when the administrator session is present.
+     */
     public function handle(Request $request, Closure $next): Response
     {
         if (! $request->session()->has('admin_id')) {

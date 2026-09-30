@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        // Categories organize the types of aspirations students can submit.
         Schema::create('kategori', function (Blueprint $table) {
             $table->increments('id_kategori');
             $table->string('nama_kategori')->unique();

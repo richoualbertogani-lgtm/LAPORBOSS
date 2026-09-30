@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    /**
+     * Display summary counts for the admin dashboard.
+     */
     public function index(Request $request)
     {
         return view('admin.dashboard', [

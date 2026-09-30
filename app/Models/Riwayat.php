@@ -13,11 +13,17 @@ class Riwayat extends Model
 
     protected $fillable = ['aspirasi_id', 'status', 'keterangan', 'id_admin'];
 
+    /**
+     * Get the aspiration associated with this history entry.
+     */
     public function aspirasi(): BelongsTo
     {
         return $this->belongsTo(Aspirasi::class, 'aspirasi_id', 'id_aspirasi');
     }
 
+    /**
+     * Get the administrator who recorded this history entry.
+     */
     public function admin(): BelongsTo
     {
         return $this->belongsTo(Admin::class, 'id_admin', 'id_admin');

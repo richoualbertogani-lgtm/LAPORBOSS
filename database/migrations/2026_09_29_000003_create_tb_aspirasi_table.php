@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        // Store each student submission, its category, and its current status.
         Schema::create('tb_aspirasi', function (Blueprint $table) {
             $table->increments('id_aspirasi');
             $table->unsignedInteger('nis');
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->dateTime('created_at')->nullable();
             $table->dateTime('update_at')->nullable();
 
+            // Keep submissions tied to their student, category, and optional reply author.
             $table->foreign('nis')->references('nis')->on('users')->cascadeOnDelete();
             $table->foreign('id_kategori')->references('id_kategori')->on('kategori');
             $table->foreign('balasan_admin_id')->references('id_admin')->on('admin')->nullOnDelete();

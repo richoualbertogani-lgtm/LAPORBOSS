@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
+    /**
+     * Seed the local demo administrator, categories, and student.
+     */
     public function run(): void
     {
         Admin::updateOrCreate(
